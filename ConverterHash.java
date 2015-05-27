@@ -5,12 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class ConverterTryHash {
+public class ConverterHash {
 	
 	static String input = "C:/Users/Matt/Desktop/Webseitenlogs/log-0.txt";
 	static String output = "C:/Users/Matt/Desktop/Webseitenlogs/output/log-0.csv";
 	static String cols = "userID,type,date,request,statusCode,contentLength,referer,agent";
-	static HashMap<String, Integer> users = new HashMap<String, Integer>(100000, 0.6f);
+	static HashMap<String, Integer> users = new HashMap<String, Integer>(100000, 0.75f);
 	static int userCount = 0;
 	
 	/**
@@ -52,8 +52,10 @@ public class ConverterTryHash {
 		toWrite = s.split(",");
 		currentHash = toWrite[0];
 		
-		//looks if from university or external pc
+		//looks if from university or external pc, wifi or vpn
 		if(currentHash.contains("clan")) end += "clan";
+		else if (currentHash.contains("wifi")) end += "wifi";
+		else if (currentHash.contains("vpn")) end += "vpn";
 		else end += "external";
 		
 		//uses "get" instead of "containsKey" because of the performance
@@ -80,7 +82,7 @@ public class ConverterTryHash {
 		BufferedReader br = null;
 		BufferedWriter bw = null;
 		
-		for(int logFile = 1; logFile <= 1; logFile++){
+		for(int logFile = 1; logFile <= 7; logFile++){
 			input = input.replace(Integer.toString(logFile - 1), Integer.toString(logFile));
 			output = output.replace(Integer.toString(logFile - 1), Integer.toString(logFile));
 			
