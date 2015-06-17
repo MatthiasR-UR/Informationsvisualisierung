@@ -9,7 +9,7 @@ public class ConverterHash {
 	
 	static String input = "C:/Users/Matt/Desktop/Webseitenlogs/log-0.txt";
 	static String output = "C:/Users/Matt/Desktop/Webseitenlogs/output/log-0.csv";
-	static String cols = "userID,type,date,request,statusCode,contentLength,referer,agent";
+	static String cols = "userID,type,date,requestType,request,protocol,statusCode,contentLength,referer,agent";
 	static HashMap<String, Integer> users = new HashMap<String, Integer>(100000, 0.75f);
 	static int userCount = 0;
 	
@@ -25,17 +25,26 @@ public class ConverterHash {
 		s = s.replace(" \"", " ");
 		// replace ending "
 		s = s.replace("\"", ",");
+
+		s = s.replace(" +0200", "");
+		s = s.replaceAll("(GET|POST|HEAD|PUT|DELETE|CONNECT|OPTIONS|TRACE)( \\/.*?) ", "$1,$2,");
 		
 		s = s.replace(" - - ", ",");
 		s = s.replace("\"-\"", ",");
 		s = s.replace("[", "");
 		s = s.replace("] ", ",");
+
+		//Monthname
+		s = s.replace("/Apr/", "/04/");
 		//comma after number of transmitted bytes
-		s = s.replaceAll("(\\ \\d{3} \\d+ )", "$1,");
+		s = s.replaceAll("\\ (\\d{3} \\d+)", "$1,");
 		//handles no bytes transmitted
-		s = s.replaceAll("(\\ \\d{3} -\\ )", "$1,");
+		s = s.replaceAll("\\ (\\d{3} -)\\ ", "$1,");
 		//comma after HTML-Status
-		s = s.replaceAll("(\\ [0-9]{3}\\ )", "$1,");
+		s = s.replaceAll("(\\d{3})\\ ((\\d+?,|-,))", "$1,$2");
+		//seperate date-time to fit SQL-Timestamp
+		s = s.replaceAll("(\\d{2}/\\d{2}/\\d{4}):", "$1 ");
+		s = s.replaceAll("(\\d{2})/(\\d{2})/(\\d{4})", "$3-$2-$1");
 		return s;
 	}
 	
