@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>d3Demo</title>
+    <link rel="stylesheet" href="res/css/styles.css">
+</head>
+
+<body>
+
+    <header>Kundenverlauf der Uni Mensa</header>
+
+
+    <content>
+        <svg class="chart"></svg>
+        <div id="info">
+            Kunden: <span class="customer"></span>
+            <br /> Hauptgericht: <span class="meal"></span>
+        </div>
+    </content>
+
+    <footer>
+        This pages uses jQuery.
+    </footer>
+
+    <script src="js/libs/jquery-2.1.3.js"></script>
+    <script src="js/libs/d3.js"></script>
+    <script src="js/src/ChartController.js"></script>
+    <script src="js/src/d3Demo.js"></script>
+
+
+
+    <script>
+        App.D3Demo.init();
+    </script>
+
+</body>
+
+</html>
