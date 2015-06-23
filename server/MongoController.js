@@ -13,18 +13,34 @@
 		
 	};
 
+	get = function(query, callback){
+		
+	};
+
+	getDistinct = function(query, callback){
+		db.collection(coll).distinct(query, function(err, docs){
+			callback(err, docs);
+		});
+	};
+
+	getCount = function(query, callback){
+		db.collection(coll).count(query, function(err, count){
+			callback(err, count);
+		})
+	};
+
 	// Use connect method to connect to the Server
 	init = function(){
 		MongoClient.connect(url, function (err, base) {
 			assert.equal(null, err);
 			db = base;
-		  	/*testQuery(db, function(){
-		  	db.close();
-		  	})*/
 		});
 	};
 
 	module.exports.init = init;
 	module.exports.testQuery = testQuery;
+	module.exports.get = get;
+	module.exports.getDistinct = getDistinct;
+	module.exports.getCount = getCount;
 
 }());
