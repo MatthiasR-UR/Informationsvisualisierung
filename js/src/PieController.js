@@ -2,7 +2,7 @@ var App = App || {};
 
 App.PieController = function(options){
 	"use strict";
-	var chart = c3.generate({
+	/*var chart = c3.generate({
 		bindto:options.chartContainer,
 		data: {
 			columns: [
@@ -11,7 +11,7 @@ App.PieController = function(options){
 	        ],
         	type : 'pie'
         }
-	});
+	});*/
 
 	function renderPieChart(){
 		console.log("rendering");
