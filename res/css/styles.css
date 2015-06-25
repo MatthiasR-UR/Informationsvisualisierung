@@ -34,6 +34,11 @@ footer {
     text-align: center;
 }
 
+h1 {
+    width: 100%;
+    margin: 0 auto;
+}
+
 content {
     flex: 1;
     min-height: 100%;
@@ -41,9 +46,8 @@ content {
     padding: 25px;
 }
 
-.chart {
-    display: block;
-    margin: 0 auto;
+#chart {
+    text-align: center;
 }
 
 #info {
