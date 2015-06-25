@@ -1,6 +1,7 @@
 (function(){
 	var mongodb = require('mongodb');
 	var assert = require('assert');
+	var getRequests = require('./routes/getRequests');
 	var ObjectId = require('mongodb').ObjectID;
 	var url = 'mongodb://localhost:27017/infovis';
 	var coll = "rawdata";
@@ -13,8 +14,8 @@
 		
 	};
 
-	get = function(query, callback){
-		
+	get = function(where, callback){
+		db.collection(coll).find(where).toArray(callback);
 	};
 
 	getDistinct = function(query, callback){
