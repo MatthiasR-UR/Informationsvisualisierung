@@ -19,7 +19,6 @@
     <!-- Custom CSS -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
-
     <!-- libraries -->
     <script src="js/libs/jquery-2.1.3.js"></script>
     <script src="js/jquery.js"></script>
@@ -28,10 +27,6 @@
     <script src="js/libs/c3.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- own scripts -->
-    <script src="js/src/PieController.js"></script>
-    <script src="js/src/Charts.js"></script>
-    <!-- end scripts -->
 
 </head>
 
@@ -84,11 +79,15 @@
                         
                     </div>
                 </div>
+                <div id="chart">
+                    <h1> Bitte wählen Sie einen Menüpunkt aus. </h1>
+                </div>
             </div>
         </div>
         <!-- /#page-content-wrapper -->
 
     </div>
+
 
 
     <!-- Menu Toggle Script -->
@@ -98,6 +97,12 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
+
+
+    <!-- own scripts -->
+    <script src="js/src/PieController.js"></script>
+    <script src="js/src/Charts.js"></script>
+    <!-- end scripts -->
 
     <!-- start app -->
     <script>
