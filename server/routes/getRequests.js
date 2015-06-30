@@ -3,6 +3,7 @@
 	var async = require("../node_modules/async");
 	var toSend = [];
     var customRes = null;
+    var days = [16,17,18,19,20,21,22,23];
 
 	sendCustom = function(err){
         customRes.json(toSend);
@@ -11,8 +12,9 @@
 
 	//returns all entries for a user with the id specified in the request
 	findUserByID = function(req, res){
-        db.get({userID: parseInt(req.params.userID)}, function(err, data){
-            return res.json(data);
+		var id = parseInt(req.params.userID) || 2;
+        db.get({userID: id}, function(err, data){
+            	return res.json(data);
         });
 	};
 
@@ -23,19 +25,47 @@
                 return res(err);
             } 
             else{
-                async.each(data, function(el, callback){
-                    var query = {statusCode:el};
-                    db.getCount(query, function(err, data){
-                        var tmp = {};
-                        tmp.code = el
-                        tmp.count = data;
-                        toSend.push(tmp);
-                        callback();
-                    });
-                }, sendCustom);
+                async.each(data, 
+                    function(el, callback){
+                        var query = {statusCode:el};
+                        db.getCount(query, function(err, data){
+                            var tmp = {};
+                            tmp.code = el
+                            tmp.count = data;
+                            toSend.push(tmp);
+                            callback();
+                        });
+                    }, 
+                    sendCustom);
             }
         });
 	};
+
+    getCountByDays = function(req, res){
+        customRes = res;
+        async.each(days, 
+            function(el, callback){
+                if(el <= days[days.length-1]){
+                    var lowerDate = new Date(2015,03, el,0,0,0,0);
+                    var upperDate = new Date(2015,03,el+1,0,0,0,0);
+                    var query = {date: {$gte: lowerDate, $lt:upperDate}};
+                    db.getCount(query, function(err, data){
+                        var tmp = {};
+                        tmp.day = el;
+                        tmp.count = data;
+                        toSend.push(tmp);
+                        callback();
+                    })
+                }
+
+            },
+            sendCustom);
+
+    };
+
+    getCountByHours = function(req, res){
+
+    };
 
 	init = function(){
 		db.init();
@@ -44,5 +74,7 @@
 	module.exports.init = init;
 	module.exports.findUserByID = findUserByID;
 	module.exports.getStatusCodes = getStatusCodes;
+    module.exports.getCountByDays = getCountByDays;
+    module.exports.getCountByHours = getCountByHours;
 
 }());
