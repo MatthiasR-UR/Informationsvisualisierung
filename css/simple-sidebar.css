@@ -8,6 +8,7 @@
 
 #wrapper {
     padding-left: 0;
+    padding-right: 0;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
@@ -16,16 +17,36 @@
 }
 
 #wrapper.toggled {
-    padding-left: 250px;
+    padding-left: 0px;
+}
+
+#wrapper.toggled-right {
+    padding-right: 0px;
 }
 
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 250px;
+    left: 210px;
     width: 0;
     height: 100%;
-    margin-left: -250px;
+    margin-left: -210px;
+    overflow-y: auto;
+    background: #364150;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+}
+
+#sidebar-wrapper-right {
+    z-index: 1000;
+    position: fixed;
+    right: 350px;
+    width: 0;
+    height: 100%;
+    margin-right: -350px;
     overflow-y: auto;
     background: #364150;
     -webkit-transition: all 0.5s ease;
@@ -36,7 +57,11 @@
 }
 
 #wrapper.toggled #sidebar-wrapper {
-    width: 250px;
+    width: 0px;
+}
+
+#wrapper.toggled-right #sidebar-wrapper-right {
+    width: 0px;
 }
 
 #page-content-wrapper {
@@ -47,15 +72,28 @@
 
 #wrapper.toggled #page-content-wrapper {
     position: absolute;
-    margin-right: -250px;
+    margin-right: -210px;
 }
+
+#menu-toggle-right {
+        float: right;
+    }
 
 /* Sidebar Styles */
 
 .sidebar-nav {
     position: absolute;
     top: 0;
-    width: 250px;
+    width: 210px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sidebar-nav-right {
+    position: absolute;
+    top: 0;
+    width: 350px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -98,9 +136,53 @@
     background: none;
 }
 
+/* right text column */
+
+.sidebar-nav-right a {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.sidebar-nav-right li a {
+    display: block;
+    text-decoration: none;
+    color: #D2D2D2;
+}
+
+.sidebar-nav-right li a:hover {
+    text-decoration: none;
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+.sidebar-nav-right li a:active,
+.sidebar-nav-right li a:focus {
+    text-decoration: none;
+}
+
+.sidebar-nav-right > .sidebar-brand-right {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+
+.sidebar-nav-right > .sidebar-brand-right a {
+    color: #D2D2D2;
+}
+
+.sidebar-nav-right > .sidebar-brand-right a:hover {
+    color: #fff;
+    background: none;
+}
+
+/* end right text column */
+
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 250px;
+        padding-left: 210px;
+        padding-right: 350px;
     }
 
     #wrapper.toggled {
@@ -108,7 +190,11 @@
     }
 
     #sidebar-wrapper {
-        width: 250px;
+        width: 210px;
+    }
+    
+     #sidebar-wrapper-right {
+        width: 350px;
     }
 
     #wrapper.toggled #sidebar-wrapper {
@@ -123,5 +209,8 @@
     #wrapper.toggled #page-content-wrapper {
         position: relative;
         margin-right: 0;
+    }
+    #menu-toggle-right {
+        float: right;
     }
 }

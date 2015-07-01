@@ -35,6 +35,11 @@ App.Charts = (function () {
                         chartContainer: document.querySelector("#chart")
                     });
                     break;
+                case "trafficType":
+                    charts[key] = new App.TrafficTypeView({
+                        chartContainer: document.querySelector("#chart")
+                    });
+                    break;
             }
             
         }
@@ -64,17 +69,21 @@ App.Charts = (function () {
     function onSidebarClick(){
         lastClicked = $(this).find("a").data("id");
         sendRequest(base + lastClicked + "/");
+        display($(this).find("a").data("id"));
     }
 
     /* init listeners for UI-elements */
     function initListeners(){
         $(".sidebar-item").click(onSidebarClick);
+        
     }
 
     function init() {
         initChartTypes();
         initCharts();
-        initListeners();        
+        initListeners(); 
+        sidebarInit();
+        
     }
 
     return {

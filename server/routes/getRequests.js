@@ -36,6 +36,27 @@
             }
         });
 	};
+    
+    getTrafficTypes = function(req, res){
+        customRes = res;
+        db.getDistinct("type", function(err, data){
+            if (err){
+                return res(err);
+            } 
+            else{
+                async.each(data, function(el, callback){
+                    var query = {type:el};
+                    db.getCount(query, function(err, data){
+                        var tmp = {};
+                        tmp.code = el
+                        tmp.count = data;
+                        toSend.push(tmp);
+                        callback();
+                    });
+                }, sendCustom);
+            }
+        });
+	};
 
 	init = function(){
 		db.init();
@@ -44,5 +65,6 @@
 	module.exports.init = init;
 	module.exports.findUserByID = findUserByID;
 	module.exports.getStatusCodes = getStatusCodes;
+    module.exports.getTrafficTypes = getTrafficTypes;
 
 }());

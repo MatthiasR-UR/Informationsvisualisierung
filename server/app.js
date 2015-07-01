@@ -8,6 +8,8 @@
 
     /* start routes */
     server.get("/statusCode/*", getRequests.getStatusCodes);
+    
+    server.get("/trafficType/*", getRequests.getTrafficTypes);
 
     server.get("/user/:userID", getRequests.findUserByID);
     /* ends routes */
