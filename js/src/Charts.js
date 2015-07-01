@@ -5,9 +5,15 @@ App.Charts = (function () {
     /* eslint-env browser, jquery  */
     var chartTypes = [];
     var charts = {};
-    var $container = $("#chart");
+    var options = {};
     var base = "http://localhost:3333/";
     var lastClicked;
+
+    function initOptions(){
+        options.chartContainer = document.querySelector("#chart");
+        options.width = $(window).width();
+        options.height = $(window).height();
+    } 
 
     /**
         Gets all used sidebar-entries and extracts their data-id
@@ -26,14 +32,13 @@ App.Charts = (function () {
             key = chartTypes[i];
             switch(key){
                 case "statusCode":
-                    charts[key] = new App.StatusCodeView({
-                        chartContainer: document.querySelector("#chart")
-                    });
+                    charts[key] = new App.StatusCodeView(options);
                     break;
-                case "timeline":
-                    charts[key] = new App.TimelineView({
-                        chartContainer: document.querySelector("#chart")
-                    });
+                case "countByDays":
+                    charts[key] = new App.TimelineView(options);
+                    break;
+                case "usernet":
+                    charts[key] = new App.UserNetView(options);
                     break;
                 case "trafficType":
                     charts[key] = new App.TrafficTypeView({
@@ -50,21 +55,19 @@ App.Charts = (function () {
         Probably not safe
     */
     function onDataReturn(data){
-        try{
-            $container.empty();
-            charts[lastClicked].setData(data);
-        }
-        catch(err){
-            throw Error (lastClicked + " has no setData-method");
-        }
+        $(options.chartContainer).empty();
+        charts[lastClicked].setData(data);
     }
 
+    /**
+        Sends an Ajax-Request to the Node-JS-Server
+    */
     function sendRequest(request){
         $.getJSON(request, onDataReturn);
     }
 
     /**
-        removes the old chart, saves the clicked element and connects to server on REST with id
+        saves the clicked element and connects to server on REST with data-id
     */
     function onSidebarClick(){
         lastClicked = $(this).find("a").data("id");
@@ -79,6 +82,7 @@ App.Charts = (function () {
     }
 
     function init() {
+        initOptions();
         initChartTypes();
         initCharts();
         initListeners(); 

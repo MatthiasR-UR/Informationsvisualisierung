@@ -9,12 +9,14 @@ function display(param) {
           currentIndex = 0;
         break;
         
-        case "timeline":
+        case "countByDays":
           currentIndex = 1;
         break;
-        
-        case "trafficType":
+        case "usernet":
           currentIndex = 2;
+        break;
+        case "trafficType":
+          currentIndex = 3;
         break;
   }
     
@@ -39,6 +41,8 @@ function sidebarInit() {
   var explanation = Constants.EXPLANATION_STATUSCODES;
   explanationArray.push(explanation);
   explanation = Constants.EXPLANATION_TIMELINE;
+  explanationArray.push(explanation);
+  explanation = Constants.EXPLANATION_USERNET;
   explanationArray.push(explanation);
   explanation = Constants.EXPLANATION_TRAFFICTYPES;
   explanationArray.push(explanation);

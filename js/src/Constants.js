@@ -18,6 +18,13 @@ Constants = {
     "test4"
     ],
     
+    EXPLANATION_USERNET : [
+    "Usernet: Anmerkungen",
+    "test2",
+    "test3",
+    "test4"
+    ],
+    
     EXPLANATION_TRAFFICTYPES : [
     "Traffic Types: Anmerkungen",
     "test2",

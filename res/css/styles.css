@@ -35,8 +35,11 @@ footer {
 }
 
 h1 {
-    width: 100%;
-    margin: 0 auto;
+    text-align: center;
+}
+
+text {
+    font-size: 10px;
 }
 
 content {
@@ -44,10 +47,6 @@ content {
     min-height: 100%;
     margin-top: 50px;
     padding: 25px;
-}
-
-#chart {
-    text-align: center;
 }
 
 #info {
@@ -83,3 +82,25 @@ content {
 .x.axis path {
     display: none;
 }
+
+/* used for user-visualization */
+svg .link {
+  stroke: #aaa;
+}
+
+.node {
+    cursor: pointer;
+}
+
+.node text {
+stroke:#333;
+cursor:pointer;
+}
+
+.node circle{
+stroke:#fff;
+stroke-width:3px;
+fill:#555;
+}
+
+/* end user-visualization */
