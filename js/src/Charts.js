@@ -70,6 +70,13 @@ App.Charts = (function () {
         saves the clicked element and connects to server on REST with data-id
     */
     function onSidebarClick(){
+        
+        // Show a spinner during the loading process
+        $('#chart').html("");
+        var target = document.getElementById('chart');
+        var spinner = new Spinner(Constants.opts).spin(target);
+        
+        
         lastClicked = $(this).find("a").data("id");
         sendRequest(base + lastClicked + "/");
         display($(this).find("a").data("id"));

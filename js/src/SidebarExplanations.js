@@ -7,8 +7,7 @@ function display(param) {
   switch(param) {
         case "statusCode":
           currentIndex = 0;
-        break;
-        
+        break; 
         case "countByDays":
           currentIndex = 1;
         break;
