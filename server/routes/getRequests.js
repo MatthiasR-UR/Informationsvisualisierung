@@ -12,7 +12,7 @@
 
 	//returns all entries for a user with the id specified in the request
 	findUserByID = function(req, res){
-		var id = parseInt(req.params.userID) || 2;
+		var id = parseInt(req.params.userID) || 23;
         db.get({userID: id}, function(err, data){
             	return res.json(data);
         });

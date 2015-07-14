@@ -56,39 +56,9 @@ App.UserNetView = function(options){
         }
     }
 
-    function isImage(s){
-        if( s.indexOf(".gif") !== -1 || s.indexOf(".jpeg") !== -1
-            || s.indexOf(".jpg") !== -1 || s.indexOf(".png") !== -1
-            || s.indexOf(".svg") !== -1)
-        {
-                return true;
-        }
-        else{
-            return false;
-        }
-    }
-
-    /**
-        TODO: more datatypes like office etc.
-    */
-    function isContent(s){
-        if (s.indexOf(".pdf") !== -1){
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
-
     function getFillColor(d){
-        if(isImage(d.request)){
-            return "mediumslateblue";
-        }
-        else if (isContent(d.request)){
+        if(d.netClass == "content"){
             return "forestgreen";
-        }
-        else if(d.request.indexOf(/res/) !== -1){
-            return "palevioletred";
         }
         else{
             return "white";
@@ -137,23 +107,6 @@ App.UserNetView = function(options){
     };
 
     /**
-        Checks for every entry if referer = request and builds a link if so
-    */
-    function buildLinks(){
-        for(var i = 0; i < data.length; i++){
-            var current = data[i];
-            for(var j = 0; j< data.length; j++){
-                if(current.referer.indexOf(data[j].request) != -1){
-                    links.push({
-                        source: j,
-                        target: i
-                    });
-                }
-            }
-        }
-    }
-
-    /**
         Resets all data for new network
     */
     function resetData(){
@@ -163,11 +116,11 @@ App.UserNetView = function(options){
     }
 
 	function setData(newData){
-		data = newData;
         if(svg !== undefined){
             resetData();
         }
-        buildLinks();
+		data = App.UserNetDataConverter().convert(newData);
+        links = App.UserNetDataConverter().buildLinks(data);
 		buildNetwork();
 	}
 

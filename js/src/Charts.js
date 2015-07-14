@@ -8,6 +8,7 @@ App.Charts = (function () {
     var options = {};
     var base = "http://localhost:3333/";
     var lastClicked;
+    var $searchbar = $("#searchbar");
 
     function initOptions(){
         options.chartContainer = document.querySelector("#chart");
@@ -66,18 +67,42 @@ App.Charts = (function () {
         $.getJSON(request, onDataReturn);
     }
 
+    function toggleSearchbar(){
+        if(lastClicked == "usernet"){
+            $searchbar.css("display", "block");
+        }
+        else{
+            $searchbar.css("display", "none");
+        }
+    }
+
     /**
         saves the clicked element and connects to server on REST with data-id
     */
     function onSidebarClick(){
         lastClicked = $(this).find("a").data("id");
+        toggleSearchbar();
         sendRequest(base + lastClicked + "/");
         display($(this).find("a").data("id"));
+    }
+
+    function onSearchClicked(event){
+        event.preventDefault();
+        var id = $searchbar.find("input").val();
+        if($.isNumeric(id) && id != null && id != undefined){
+            sendRequest(base + lastClicked + "/" + id);
+        }
     }
 
     /* init listeners for UI-elements */
     function initListeners(){
         $(".sidebar-item").click(onSidebarClick);
+        $("#searchbar button").click(onSearchClicked);
+        $searchbar.keypress(function(e){
+            if(e.which == 13){
+                onSearchClicked(e);
+            }
+        })
         
     }
 

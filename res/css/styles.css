@@ -59,6 +59,10 @@ content {
     font-size: 12px;
 }
 
+#searchbar{
+    display: none;
+}
+
 .bar {
     fill: rgb(124, 114, 191);
 }
