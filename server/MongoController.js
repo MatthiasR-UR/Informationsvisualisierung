@@ -3,7 +3,7 @@
 	var assert = require('assert');
 	var getRequests = require('./routes/getRequests');
 	var ObjectId = require('mongodb').ObjectID;
-	var url = 'mongodb://localhost:27017/test';
+	var url = 'mongodb://localhost:27017/infovis';
 	var coll = "rawdata";
 	var MongoClient = mongodb.MongoClient;
 	var db = null;

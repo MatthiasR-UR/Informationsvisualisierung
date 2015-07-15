@@ -12,7 +12,7 @@
 
 	//returns all entries for a user with the id specified in the request
 	findUserByID = function(req, res){
-		var id = parseInt(req.params.userID) || 23;
+		var id = parseInt(req.params.userID) || 2;
         db.get({userID: id}, function(err, data){
             	return res.json(data);
         });
@@ -55,12 +55,10 @@
                         tmp.count = data;
                         toSend.push(tmp);
                         callback();
-
                     })
                 }
-
             },
-            sendCustom);
+        sendCustom);
 
     };
     
@@ -87,7 +85,7 @@
 
     
     getCountByHours = function(req, res){
-
+        console.dir(req.params.day);
     };
 
 

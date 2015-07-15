@@ -12,10 +12,8 @@ Constants = {
     ],
     
     EXPLANATION_TIMELINE : [
-    "Timeline: Anmerkungen",
-    "test2",
-    "test3",
-    "test4"
+    "Tagesansicht:",
+    "Zeigt die Anzahl der Aufrufe für jeden Tag. Ein Klick auf einen der Balken zeigt eine Detailansicht der jeweiligen Tages"
     ],
     
     EXPLANATION_USERNET : [
@@ -28,7 +26,7 @@ Constants = {
     EXPLANATION_TRAFFICTYPES : [
     "Traffic Types: Anmerkungen",
     
-     "<strong>• <span style='color: rgb(214, 39, 40)'>external:</span></strong></br>Zugriffe von außerhalb des Universitätsnetzwerkes.",
+    "<strong>• <span style='color: rgb(214, 39, 40)'>external:</span></strong></br>Zugriffe von außerhalb des Universitätsnetzwerkes.",
         
     "<strong>• <span style='color: rgb(44, 160, 44)'>clan:</span></strong></br>Zugriffe von innerhalb des Universitätsnetzwerkes über stationäre Rechner.",
         

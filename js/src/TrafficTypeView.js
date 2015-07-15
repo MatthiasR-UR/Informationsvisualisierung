@@ -32,20 +32,7 @@ App.TrafficTypeView = function(options){
 		return toReturn;
 	}
 
-	/**
-		not used right now. Probably cannot use
-		since we don't know which chart is active
-	*/
-	function updatePieChart(){
-		chart.load({
-		columns: data,
-        	type: 'pie',
-			unload: true
-		});
-	};
-
 	function setData(newData){
-        console.log("setting Data");
 		data = formatJSON(newData);
 		initChart();
 	}

@@ -1,6 +1,6 @@
 var App = App || {};
 
-App.Charts = (function () {
+App.ChartController = (function () {
     "use strict";
     /* eslint-env browser, jquery  */
     var chartTypes = [];
@@ -101,6 +101,10 @@ App.Charts = (function () {
         }
     }
 
+    function onDayClick(event, day){
+        sendRequest(base + "countByHours/" + day);
+    }
+
     /* init listeners for UI-elements */
     function initListeners(){
         $(".sidebar-item").click(onSidebarClick);
@@ -109,7 +113,8 @@ App.Charts = (function () {
             if(e.which == 13){
                 onSearchClicked(e);
             }
-        })
+        });
+        $(App.TimelineView).on("barClick", onDayClick);
         
     }
 
@@ -118,8 +123,7 @@ App.Charts = (function () {
         initChartTypes();
         initCharts();
         initListeners(); 
-        sidebarInit();
-        
+        sidebarInit();        
     }
 
     return {

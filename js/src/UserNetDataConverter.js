@@ -5,7 +5,7 @@ App.UserNetDataConverter = function(){
 	function isImage(s){
         if( s.indexOf(".gif") !== -1 || s.indexOf(".jpeg") !== -1
             || s.indexOf(".jpg") !== -1 || s.indexOf(".png") !== -1
-            || s.indexOf(".svg") !== -1)
+            || s.indexOf(".svg") !== -1 || s.indexOf(".ico") !== -1)
         {
                 return true;
         }
@@ -14,9 +14,6 @@ App.UserNetDataConverter = function(){
         }
     }
 
-    /**
-        TODO: more datatypes like office etc.
-    */
     function isContent(s){
         if (s.indexOf(".pdf") !== -1){
             return true;
@@ -36,7 +33,10 @@ App.UserNetDataConverter = function(){
         else if (isContent(d.request)){
             return "content";
         }
-        else if(d.request.indexOf(/res/) !== -1){
+        else if(d.request.indexOf(".js") !== -1){
+            return "irrelevant";
+        }
+        else if(d.request.indexOf(".css") !== -1){
             return "irrelevant";
         }
         else{
