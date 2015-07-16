@@ -55,12 +55,10 @@
                         tmp.count = data;
                         toSend.push(tmp);
                         callback();
-
                     })
                 }
-
             },
-            sendCustom);
+        sendCustom);
 
     };
     
@@ -87,7 +85,7 @@
 
     
     getCountByHours = function(req, res){
-
+        console.dir(req.params.day);
     };
 
 

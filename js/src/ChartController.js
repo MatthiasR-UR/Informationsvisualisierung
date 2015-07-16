@@ -1,6 +1,6 @@
 var App = App || {};
 
-App.Charts = (function () {
+App.ChartController = (function () {
     "use strict";
     /* eslint-env browser, jquery  */
     var chartTypes = [];
@@ -9,6 +9,7 @@ App.Charts = (function () {
     var secondOptions = {};
     var base = "http://localhost:3333/";
     var lastClicked;
+    var $searchbar = $("#searchbar");
 
     function initOptions(){
         options.chartContainer = document.querySelector("#chart");
@@ -73,6 +74,15 @@ App.Charts = (function () {
         $.getJSON(request, onDataReturn);
     }
 
+    function toggleSearchbar(){
+        if(lastClicked == "usernet"){
+            $searchbar.css("display", "block");
+        }
+        else{
+            $searchbar.css("display", "none");
+        }
+    }
+
     /**
         saves the clicked element and connects to server on REST with data-id
     */
@@ -86,14 +96,34 @@ App.Charts = (function () {
         
         
         lastClicked = $(this).find("a").data("id");
+        toggleSearchbar();
         sendRequest(base + lastClicked + "/");
         display($(this).find("a").data("id"));
         
     }
 
+    function onSearchClicked(event){
+        event.preventDefault();
+        var id = $searchbar.find("input").val();
+        if($.isNumeric(id) && id != null && id != undefined){
+            sendRequest(base + lastClicked + "/" + id);
+        }
+    }
+
+    function onDayClick(event, day){
+        sendRequest(base + "countByHours/" + day);
+    }
+
     /* init listeners for UI-elements */
     function initListeners(){
         $(".sidebar-item").click(onSidebarClick);
+        $("#searchbar button").click(onSearchClicked);
+        $searchbar.keypress(function(e){
+            if(e.which == 13){
+                onSearchClicked(e);
+            }
+        });
+        $(App.TimelineView).on("barClick", onDayClick);
         
     }
 
@@ -103,8 +133,7 @@ App.Charts = (function () {
         initChartTypes();
         initCharts();
         initListeners(); 
-        sidebarInit();
-        
+        sidebarInit();        
     }
 
     return {

@@ -1,5 +1,6 @@
 var App = App || {};
 
+
 App.TrafficTypeView = function (options, secondOptions) {
     "use strict";
     var data, chart, secondChart;
@@ -188,4 +189,5 @@ App.TrafficTypeView = function (options, secondOptions) {
     return {
         setData: setData
     }
+
 };
