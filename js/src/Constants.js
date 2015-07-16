@@ -13,14 +13,15 @@ Constants = {
     
     EXPLANATION_TIMELINE : [
     "Tagesansicht:",
-    "Zeigt die Anzahl der Aufrufe für jeden Tag. Ein Klick auf einen der Balken zeigt eine Detailansicht der jeweiligen Tages"
+    "Zeigt die Anzahl der Aufrufe für jeden Tag. Ein Klick auf einen der Balken zeigt eine Detailansicht der jeweiligen Tages."
     ],
     
     EXPLANATION_USERNET : [
-    "Usernet: Anmerkungen",
-    "test2",
-    "test3",
-    "test4"
+    "Seitennetzwerk",
+    "•Zeigt die Seiten, die ein Nutzer aufgerufen hat. Die Verbindungen der Punkte stehen für Klickpfade.",
+    "•Über das Suchfeld oben kann eine beliebe Nutzer-ID zwischen 0 und 180994 eigegeben werden.",
+    "•Die Farbe des Kreises steht für den Typ des Dokumentes. <span style='rgb(150, 150, 150)'>Weiß</span> steht für Webseiten, <span style='color: rgb( 34, 139, 34)'>Grün;</span> für Inhalte wie PDFs et cetera.",
+    "•Die Farbe der Umrandung gibt den Typ der Verbindung an:</br>   Extern: <span style='color: rgb(210, 105, 30)'>braun</span></br>   VPN: <span style='color: rgb(199, 21, 133)'>violett</span></br>   Wifi: <span style='color: rgb(224, 255, 255)'>cyan</span></br>   Clan: <span style='color: rgb(173, 255, 47)'>hellgrün</span></br>"
     ],
     
     EXPLANATION_TRAFFICTYPES : [

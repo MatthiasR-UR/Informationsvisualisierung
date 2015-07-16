@@ -2,7 +2,8 @@ var App = App || {};
 
 App.UserNetView = function(options){
     var links = [];
-    var data, svg, force, tooltip, details;
+    var data = [];
+    var svg, force, tooltip, details;
 
     function initSVG(){
         return d3.select(options.chartContainer)
@@ -23,20 +24,31 @@ App.UserNetView = function(options){
             .size([options.width, options.height]);
     }
 
+    /**
+        creates an invisible div for tooltip 
+    */
     function initTooltip(){
-        return d3.select(options.chartContainer)
-            .append("div")
-            .style("position", "absolute")
-            .style("z-index", "10")
-            .style("background", "white")
-            .style("visibility", "hidden");
+        tooltip = d3.select(options.chartContainer).append("div").attr("class", "netTooltip");
+        tooltip.append("div").attr("class", "ttRequest ttLine");
+        tooltip.append("div").attr("class", "ttDate ttLine");
+        tooltip.append("div").attr("class", "ttStatus ttLine");
+        tooltip.append("div").attr("class", "ttType ttLine");
+        tooltip.append("div").attr("class", "ttReferrer ttLine");
+        tooltip.append("div").attr("class", "ttAgent ttLine");
+        //clickListener to hide tooltip when clicked anywhere in diagram
+        $(options.chartContainer).click(function(){
+            tooltip.style('display', 'none');
+        }); 
     }
 
+    /**
+        
+    */
     function initDetails(){
         return d3.select(options.chartContainer)
             .append("div")
             .style("position", "aboslute")
-            .style("z-index", "10")
+            .style("z-index", "9")
             .style("background", "white")
             .style("visibility", "hidden");
     }
@@ -65,14 +77,24 @@ App.UserNetView = function(options){
         }
     }
 
+    /**
+        Fills tooltips with informations of current item and shows it
+    */
     function onItemClick(d){
-        console.log(d);
+        event.stopPropagation();
+        tooltip.select('.ttRequest').html("<strong>Request: </strong>" + d.request);
+        tooltip.select('.ttDate').html("<strong>Datum: </strong>" + d.date);
+        tooltip.select('.ttStatus').html("<strong>Statuscode: </strong>" + d.statusCode);
+        tooltip.select(".ttType").html("<strong>Verbindung: </strong>" + d.type);
+        tooltip.select(".ttReferrer").html("<strong>Referrer: </strong>" + d.referer);
+        tooltip.select(".ttAgent").html("<strong>Agent: </strong>" + d.agent);
+        tooltip.style('display', 'block');     
     }
 
 	function buildNetwork(){
         svg = initSVG();
         force = initForce();
-        tooltip = initTooltip();
+        initTooltip();
         details = initDetails();
 
         force.nodes(data).links(links).start();
@@ -86,9 +108,9 @@ App.UserNetView = function(options){
             .data(data)
             .enter().append("g")
             .attr("class", "node")
-            .on("mouseover", function(d){return tooltip.text(d.request).style("visibility", "visible");})
-            .on("mousemove", function(){return tooltip.style("top", (event.layerY-20)+"px").style("left",(event.layerX+20)+"px");})
-            .on("mouseout", function(){return tooltip.style("visibility", "hidden");})
+            .on("mouseover", function(d){return details.text(d.request).style("visibility", "visible");})
+            .on("mousemove", function(){return details.style("top", (event.layerY-20)+"px").style("left",(event.layerX+20)+"px");})
+            .on("mouseout", function(){return details.style("visibility", "hidden");})
             .on("click", onItemClick);
 
         node.append("circle")
@@ -113,6 +135,7 @@ App.UserNetView = function(options){
         svg.selectAll("*").remove();
         $(options.chartContainer).empty();
         links = [];
+        data = [];
     }
 
 	function setData(newData){

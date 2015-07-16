@@ -4,32 +4,20 @@ App.TimelineView = function(options){
 	var chart, xAxis, yAxis;
 	var data = [];
 	var dates = [16,17,18,19,20,21,22];
+	var weekday = {	16: "Donnerstag", 17: "Freitag", 18: "Samstag", 
+					19: "Sonntag", 20: "Montag", 21: "Dienstag", 22: "Mittwoch"};
+	var showHourChart = false;
 
 
 	/**
 		Initiates new request to get view for hours of chosen day
 	*/
 	function onBarClick(d, element){
-		$(App.TimelineView).trigger("barClick", [dates[d.index]]);
+			showHourChart = true;
+			$(App.TimelineView).trigger("barClick", [dates[d.index]]);
 	}
 
-	/**
-		Converts the data received from server to the format needed for C3
-	*/
-	function formatData(newData){
-		newData.sort(function(a,b){
-			return a.day - b.day;
-		});
-		newData[newData.length-2].count += newData[newData.length-1].count;
-		newData.pop()
-		data = ["Aufrufe"];
-		for(var i = 0; i < newData.length; i++){
-			data.push(newData[i].count);
-		}
-		return data;
-	}
-
-	function initChart(){
+	function initDayChart(){
 		chart = c3.generate({
 			bindto: options.chartContainer,
     		data: {
@@ -40,8 +28,14 @@ App.TimelineView = function(options){
     		axis:{
     			x:{
     				type:"category",
-    				categories: dates
-    				
+    				categories: dates,
+    				label: {
+    					text: "Tag",
+    					position: "outer-center"
+    				}   				
+    			},
+    			y:{
+    				label: "Aufrufe"
     			}
     		},
     		bar: {
@@ -54,15 +48,51 @@ App.TimelineView = function(options){
     		},
     		tooltip: {
         		format: {
-            		title: function (d) { return dates[d] + ".4.2015"; }
+            		title: function (d) { return weekday[dates[d]] + " der " + dates[d] + ".4.2015"; }
+        		}
+    		}
+		});
+	}
+
+	function initHourChart(){
+		chart = c3.generate({
+			bindto: options.chartContainer,
+    		data: {
+        		columns: [data],
+    		},
+    		axis:{
+    			x:{
+    				type:"category",
+    				label: {
+    					text: "Stunde",
+    					position: "outer-center"
+    				}
+    			},
+    			y:{
+    				label: "Aufrufe"
+    			}
+    		},
+    		legend:{
+    			hide:true
+    		},
+    		tooltip: {
+        		format: {
+            		title: function (d) { return d + " Uhr"; }
         		}
     		}
 		});
 	}
 
 	function setData(newData){
-		data = formatData(newData);
-		initChart();
+		if(showHourChart === false){
+			data = App.TimelineDataConverter().convertDays(newData);
+			initDayChart();
+		}
+		else{
+			data = App.TimelineDataConverter().convertHours(newData);
+			initHourChart();
+			showHourChart = false;
+		}
 	}
 
 

@@ -54,6 +54,8 @@ App.UserNetDataConverter = function(){
 		for(var i = 0; i < input.length; i++){
 			switch( isRelevant(input[i])){
 				case "irrelevant":
+                    /*input[i].netClass = "irrelevant";
+                    output.push(input[i]);*/
 					break;
 				case "page":
 					input[i].netClass = "page";
@@ -76,7 +78,8 @@ App.UserNetDataConverter = function(){
 		var output = [];
 		for(var i = 0; i < data.length; i++){
             var current = data[i];
-            for(var j = 0; j< data.length; j++){
+            if(current.referer === undefined ) {continue;}
+            for(var j = 0; j < data.length; j++){
                 if(current.referer.indexOf(data[j].request) != -1){
                     output.push({
                         source: j,

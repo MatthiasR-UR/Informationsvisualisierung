@@ -45,14 +45,36 @@ svg .link {
 }
 
 .node text {
-stroke:#333;
-cursor:pointer;
+    stroke:#333;
+    cursor:pointer;
 }
 
 .node circle{
-stroke:#fff;
-stroke-width:3px;
-fill:#555;
+    stroke:#fff;
+    stroke-width:3px;
+    fill:#555;
+}
+
+.netTooltip {
+    background: #eee;
+    box-shadow: 0 0 5px #999999;
+    color: #333;
+    display: none;
+    font-size: 12px;
+    left: 130px;
+    padding: 10px;
+    position: absolute;
+    text-align: center;
+    top: 95px;
+    width: 500px;
+    z-index: 10;   
+    overflow: scroll;
+}  
+
+.ttLine {
+    border-bottom: thin solid #fff;
+    margin-top: 3px;
+    margin-bottom: 3px;
 }
 
 /* end user-visualization */
