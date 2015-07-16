@@ -80,6 +80,7 @@ App.StatusCodeView = function(options){
 	  			}
 			}
 		});
+        $('#chart').prepend( "<h2>Häufigkeitsverteilung der HTML Statuscodes</h2>" );
 	}
 
 
