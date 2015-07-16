@@ -18,6 +18,14 @@ body {
     color: rgba(30, 30, 30, 1);
 }
 
+h2 {
+    
+    text-align: center !important;
+    margin-top: 0px !important;
+    margin-bottom: 30px !important; 
+    
+    }
+
 header {
     width: 100%;
     height: 50px;
@@ -72,6 +80,22 @@ content {
     font-size: 10px;
 }
 
+#selectTrafficType {
+    
+    
+    margin-bottom: 40px !important;
+    margin-top: 40px !important;
+    background-color: #EDEDED !important;
+    
+    
+}
+
+.c3-tooltip th {
+    
+    font-size: 30px !important;
+
+}
+
 .axis path,
 .axis line {
     fill: none;
@@ -90,6 +114,10 @@ svg .link {
 
 .node {
     cursor: pointer;
+}
+
+#secondChart {
+    margin-top: 200px !important;
 }
 
 .node text {

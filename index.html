@@ -56,12 +56,7 @@
                 <li class="sidebar-item">
                     <a href="#" data-id="trafficType">Traffic Types</a>
                 </li>
-                <li>
-                    <a href="#">Visualisierung XY</a>
-                </li>
-                <li>
-                    <a href="#">Visualisierung XY</a>
-                </li>
+        
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -77,17 +72,17 @@
                 </li>
                 <li>
                     <a id="first_headword">
-					•  Phasellus et ligula vel diam ullamcorper volutpat. Phasellus et ligula. <br>
+					<br>
 				    </a>
                 </li>
                  <li>
                     <a id="second_headword">
-					•  Phasellus et ligula vel diam ullamcorper volutpat. Phasellus et ligula.<br>
+					<br>
 				    </a>
                 </li>
                  <li>
                     <a id="third_headword">
-					•  Phasellus et ligula vel diam ullamcorper volutpat. Phasellus et ligula.<br>
+					<br>
 				    </a>
                 </li>
               
@@ -106,9 +101,77 @@
                         
                     </div>
                 </div>
+                
+                 <!-- First Div for the first chart -->
                 <div id="chart">
-                    <h1> Bitte wählen Sie einen Menüpunkt aus. </h1>
+                    <h2> Informationsvisualisierung: Website-Logs </h2>
+                    </br></br>
+                    <p><code style="font-size: 100%"> Datenumfang: <strong>12.734.178</strong> Datensätze, welche nach Bearbeitung wie folgt aufgebaut sind:</code></p>
+                   
+                    <pre style="font-size: 17px !important">
+                    </br>
+                       {
+                       
+                                <strong>"_id"</strong> : ObjectId("55896a7d213bf407b4733e2b"),
+                                <strong>"userID"</strong> : 139,
+                                <strong>"type"</strong> : "clan",
+                                <strong>"date"</strong> : ISODate("2015-04-15T22:03:20Z"),
+                                <strong>"requestType"</strong> : "GET",
+                                <strong>"request"</strong> : "/res/js/bootstrap.min.js",
+                                <strong>"protocol"</strong> : "HTTP/1.1",
+                                <strong>"statusCode"</strong> : 200,
+                                <strong>"contentLength"</strong> : 5288,
+                                <strong>"referer"</strong> : "http://www.uni-regensburg.de/",
+                                <strong>"agent"</strong> : "Mozilla/5.0 (Windows NT 5.1; rv:37.0) Gecko/20100101 Firefox/37.0"
+                    
+                       
+                       }
+                    </pre>
+
+        
+                <div class="container" >
+                    
+                  <!-- Example row of columns -->
+                  <div class="row text-center" style="margin-top: 150px">
+                   
+                    <div class="col-md-4">
+                      <h2>Bootstrap</h2>
+                      <img class="center-block" src="res/img/Boostrap_logo.svg" class="img-responsive" alt="Framework" width="304" height="236"> 
+                      
+                    </div>
+                    <div class="col-md-4">
+                      <h2>mongoDB</h2>
+                        <img class="center-block" src="res/img/1605635.png" class="img-responsive" alt="Framework" width="304" height="236">
+                      
+                   </div>
+                    <div class="col-md-4">
+                      <h2>NodeJs</h2>
+                        <img class="center-block" src="res/img/logo-light.svg" class="img-responsive" alt="Framework" width="304" height="236">
+                     </br></br></br>
+                    </div>
+                    <div class="col-md-4">
+                      <h2>C3.js</h2>
+                        <img class="center-block" src="res/img/8778.png" class="img-responsive" alt="Framework" width="304" height="236">
+                      
+                    </div>
+                  </div>
+    
                 </div>
+            </div>
+            <!-- /First Div for the first chart -->
+
+
+            <!-- Second Div for the second chart, initally hidden -->
+            <div id="secondChart">
+                
+                    <div id="secondChartAppend">
+                        
+                    </div>
+                    
+            </div>
+            <!-- /Second Div for the second chart, initally hidden -->
+
+
             </div>
         </div>
         <!-- /#page-content-wrapper -->
@@ -122,12 +185,15 @@
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled");
+        setTimeout(function() { $(window).trigger('resize'); }, 500);
+        
     });
     </script>
       <script>
     $("#menu-toggle-right").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("toggled-right");
+        setTimeout(function() { $(window).trigger('resize'); }, 500);
     });
     </script>
 

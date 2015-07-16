@@ -6,6 +6,7 @@ App.Charts = (function () {
     var chartTypes = [];
     var charts = {};
     var options = {};
+    var secondOptions = {};
     var base = "http://localhost:3333/";
     var lastClicked;
 
@@ -13,6 +14,13 @@ App.Charts = (function () {
         options.chartContainer = document.querySelector("#chart");
         options.width = $(window).width();
         options.height = $(window).height();
+    } 
+    
+    function initSecondOptions(){
+        secondOptions.chartContainer = document.querySelector("#secondChart");
+        secondOptions.width = $(window).width();
+        secondOptions.height = $(window).height();
+        $('#secondChart').css("visibility", "hidden");
     } 
 
     /**
@@ -41,9 +49,7 @@ App.Charts = (function () {
                     charts[key] = new App.UserNetView(options);
                     break;
                 case "trafficType":
-                    charts[key] = new App.TrafficTypeView({
-                        chartContainer: document.querySelector("#chart")
-                    });
+                    charts[key] = new App.TrafficTypeView(options, secondOptions);
                     break;
             }
             
@@ -57,6 +63,7 @@ App.Charts = (function () {
     function onDataReturn(data){
         $(options.chartContainer).empty();
         charts[lastClicked].setData(data);
+        console.log("charts - last clicked: " + charts[lastClicked]);
     }
 
     /**
@@ -73,6 +80,7 @@ App.Charts = (function () {
         
         // Show a spinner during the loading process
         $('#chart').html("");
+        $('#secondChart').html("");
         var target = document.getElementById('chart');
         var spinner = new Spinner(Constants.opts).spin(target);
         
@@ -80,6 +88,7 @@ App.Charts = (function () {
         lastClicked = $(this).find("a").data("id");
         sendRequest(base + lastClicked + "/");
         display($(this).find("a").data("id"));
+        
     }
 
     /* init listeners for UI-elements */
@@ -90,6 +99,7 @@ App.Charts = (function () {
 
     function init() {
         initOptions();
+        initSecondOptions();
         initChartTypes();
         initCharts();
         initListeners(); 
