@@ -52,6 +52,7 @@ App.TimelineView = function(options){
         		}
     		}
 		});
+        $('#chart').prepend("<h2>Timeline der Serverzugriffe pro Tag</h2>");
 	}
 
 	function initHourChart(){
@@ -81,6 +82,7 @@ App.TimelineView = function(options){
         		}
     		}
 		});
+        $('#chart').prepend("<h2>Timeline der Serverzugriffe pro Stunde</h2>");
 	}
 
 	function setData(newData){
